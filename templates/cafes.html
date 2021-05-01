@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
 {% endblock %}
 
-{% block title %}Restaurants{% endblock %}
+{% block title %}Shmucks{% endblock %}
 
 {% block content %}
 
@@ -12,15 +12,34 @@
   <div class="row">
     <div class="col-sm-12">
 
-      <h1>All Cafes</h1>
+      <h1>Tolerant Businesses Near You</h1>
 
-	  <table class="table">
-          <!-- This is where you will write the code to render a Bootstrap 
-          Table that contains all the information from the 
-          cafe-data.csv file. -->
-  	  </table>
+    <table class="table">
+        <thead>
+            <tr>
+<!--                tables headers occupy first row of .csv (translate to dict?)-->
+                {% for entry in cafes[0] %}
+                <th>{{ entry }}</th>
+                {% endfor %}
+            <tr>
+        </thead>
+        <tbody>
+            {% for entry in cafes[1:] %}
+            <tr>
+<!--                here a dict would be way more legible-->
+                <td>{{ entry[0] }}</td>
+                <td><a href= "{{ entry[1] }}">Maps Link</a></td>
+                <td>{{ entry[2] }}</td>
+                <td>{{ entry[3] }}</td>
+                <td>{{ entry[4] }}</td>
+                <td>{{ entry[5] }}</td>
+                <td>{{ entry[6] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-      <p><a href="#">Return to index page</a></p>
+      <p><a href="{{ url_for('home') }}">Return to index page</a></p>
 
     </div>
   </div>
